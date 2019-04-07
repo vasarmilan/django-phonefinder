@@ -1,0 +1,30 @@
+[
+  {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Vizuális",
+      "id": 10001
+    }
+  },
+  {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Ergonómia",
+      "id": 10002
+    }
+  },
+  {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Ár/érték aránya",
+      "id": 10003
+    }
+  },
+  {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Sebesség",
+      "id": 10004
+    }
+  }
+]

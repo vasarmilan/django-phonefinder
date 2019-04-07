@@ -1,0 +1,6 @@
+rm db.sqlite3
+find . -name migrations -type d -exec find "{}" ! -name "__init__.py" -type f \; | xargs rm -f
+./manage.py makemigrations
+./manage.py migrate
+./manage.py loaddata criteria
+. startup

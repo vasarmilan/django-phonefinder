@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<head>
+    {% include 'bootstrap-css.html' %}
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/custom.css' %}">
+    <link rel="shortcut icon" href="#">
+</head>
+{% block "product-list" %}
+<div class="container">
+    <div id="test">
+    </div>
+    <form id="comparisons">
+        {% csrf_token %}
+        <input type="text" name="price" id="price" value="" class="js-range-slider" hidden=true
+        />
+        <div>
+            <h3>Comparisons:</h3>
+            <div id="comparisons">
+                {% for comparison in comparisons %}
+                <div hidden=true id="parent_{{ comparison.id }}" class="comparison" >
+                    <p>
+                    Válasszon a következő két alternatíva közül:<br/> <span style="color:red">{{ comparison.name0 }}</span> - <span style="color:green">{{comparison.name1}}</span>
+                    </p>
+
+                    <input id="{{ comparison.id }}" name="{{ comparison.2 }}" value="" min="1" max="99" style="width: 3em;" type="number">%</input>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <input type="submit" value="OK"/>
+    </form>
+    <div class="container" id="product-list-container">
+        <!-- TODO -->
+        <div class="loader"></div>
+    </div>
+</div>
+    {# {% include 'product/product_list.html' %} #}
+{% endblock %}
+{# {% include 'bootstrap-js.html' %} #}
+{% block 'productlist-js' %}
+{% include "bootstrap-js.html" %}
+<script src="{% static "js/products.js" %}">
+</script>
+{% endblock %}

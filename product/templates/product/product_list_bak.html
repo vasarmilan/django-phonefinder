@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<head>
+    {% include 'bootstrap-css.html' %}
+</head>
+<div class="container">
+    <div class="row">  
+            {% for product in products %}
+            <!-- <div class="col&#45;lg&#45;3 col&#45;12 col&#45;md&#45;4 col&#45;sm&#45;5 card -->
+            <!-- mr&#45;3 mb&#45;3 rounded" -->
+            <div class="col-12
+            card mr-3 mb-3 rounded"
+                 style="overflow: hidden; border-width: 3px;"
+                >
+                <img src="{{product.image.url}}"
+                     alt="{{product.name}}"
+                     style="width: 100%; height: 20vh; object-fit: contain;"
+                     class="media-left"
+                     />
+                <h3 class="card-title mt-auto" >{{product.name}}</h1>
+                <p class="card-subtitle mt-auto"><em>{{product.price}} Ft </em></p>
+            </div>
+
+            <!-- <div class="mr&#45;1"/> -->
+            {% endfor %}
+    </div>
+
+</div>
+{% include 'bootstrap-js.html' %}

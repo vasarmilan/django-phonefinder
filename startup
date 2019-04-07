@@ -1,0 +1,1 @@
+nix-shell -p python36Packages.django_2_0 python36Packages.pillow python36Packages.ipython python36Packages.requests python36Packages.numpy
