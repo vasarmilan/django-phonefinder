@@ -21,6 +21,7 @@ urlpatterns = [
     path('', product.views.product_list),
     path('product-list', product.views.product_list),
     path('product-list-ajax', product.views.product_list_ajax),
+    path('ajax/all_products', product.views.all_product_list_ajax),
     path('ajax/complete_pcm_validate',
          product.views.complete_pcm_validate_ajax)
 ]

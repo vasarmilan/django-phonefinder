@@ -5,35 +5,124 @@
     <link rel="shortcut icon" href="#">
 </head>
 {% block "product-list" %}
-<div class="container">
-    <div id="test">
-    </div>
-    <form id="comparisons">
-        {% csrf_token %}
-        <input type="text" name="price" id="price" value="" class="js-range-slider" hidden=true
-        />
-        <div>
-            <h3>Comparisons:</h3>
-            <div id="comparisons">
-                {% for comparison in comparisons %}
-                <div hidden=true id="parent_{{ comparison.id }}" class="comparison" >
-                    <p>
-                    Válasszon a következő két alternatíva közül:<br/> <span style="color:red">{{ comparison.name0 }}</span> - <span style="color:green">{{comparison.name1}}</span>
-                    </p>
-
-                    <input id="{{ comparison.id }}" name="{{ comparison.2 }}" value="" min="1" max="99" style="width: 3em;" type="number">%</input>
+<div class="container" id="main-container" style="display: none;">
+    {% csrf_token %}
+    <div>
+        <div id="comparisons" class="row my-3">
+            {% for comparison in comparisons %}
+            <div class=""></div>
+            <div id="parent_{{ comparison.id }}" class="comparison col-sm-10 card mb-3 offset-sm-1 comparison-hidden ">
+                <div>
+                    Jelölje ki a következő szempontok fontosságát a lenti csúszkán!   <i class="fas fa-question" style="font-size:0.5em;"></i>
+                    <div class="hover-or-click">
+                        Például: ha az első szempont kétszer olyan fontos, mint a másik, akkor állítsta a csúszka értékét 66%-ra, ha azonos fontosságúak 50%-ra stb. Ha elkészült, kattintson a &quot;Következő&quot; gombra.
+                    </div>
                 </div>
+                <div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="comp_name1 comp_name"><h5>
+                                {{ comparison.name0 }}: 
+                                <span id="{{comparison.id}}_0_percent"></span>%
+                            </h5>
+                            <p class="criterion-description">
+                            {{ comparison.description0 }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="comp_name2 comp_name"><h5>{{comparison.name1}}: <span id="{{comparison.id}}_1_percent"></span>%</h5>
+                            <p class="criterion-description">
+                            {{ comparison.description1 }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" name="{{ comparison.id }}" id="{{comparison.id}}" value="" class="js-range-slider comparison-slider" hidden=true />
+                    <p id="{{ comparison.id }}_notyetset" style="display:none;">Kérem állítsa a kívánt értékre a fenti csúszkát!</p>
+                <div class="justify-content-around d-flex">
+                    <button id="comparisons-back" onclick="comparisonBack()" class="btn float-left comp-back-button comp-button">Vissza</button>
+                    <button id="comparisons-next "onclick="comparisonNext()" class="btn btn-primary float-right comp-button comp-next-button">Következő</button>
+                    <button id="comparisons-ok "onclick="comparisonSubmit()" class="btn btn-primary float-right comp-button comp-ok-button">Ok</button>
+                </div>
+            </div>
             {% endfor %}
+        </div>
+        <div class="">
+            <div class="col-sm-10 card mb-3 offset-sm-1">
+                    <div class="filters-heading">
+                        <h4 class="text-center mb-0 card-header">
+                            <a class="accordion-toggle" data-toggle="collapse"
+                                data-target="#filters-body ">
+                                Szűrők
+                            </a>
+
+                        </h4>
+                    </div>
+                    <div class="collapse show" id="filters-body">
+                        <form class="row">
+                            <div class="col-sm-6">
+                                <h5 class="text-center">Ár</h5>
+                                <div class="form-row">
+                                    <div class="col-6">
+                                        <label for="price-min-input">Minimum ár:</label>
+                                        <input type="text" name="price-min" id="price-min-input" value="" class="price-input form-control" maxlength="6" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="price-max-input">Maximum ár:</label>
+                                        <input type="text" name="price-max" id="price-max-input" value="" class="price-input form-control" maxlength="6"/>
+                                    </div>
+                                </div>
+                                <input type="text" name="price-slider" id="price-slider" value="" class="js-range-slider" hidden=true/>
+                            </div>
+                            <div class="col-sm-6" id="screen-size-checkboxes">
+                                <h5 class="text-center">Kijelzőméret</h5>
+                                <div class="row">
+                                    <div class="text-center col-sm-6 d-flex flex-column align-items-center">
+                                        <div class="checkbox" id="sizebox0">
+                                            <label><input type="checkbox" name="screensize0" class="">5" alatt</label>
+                                        </div>
+                                        <div class="checkbox" id="sizebox1">
+                                            <label><input type="checkbox" name="screensize1" class="" checked>5"-5,5"</label>
+                                        </div>
+                                        <div class="checkbox" id="sizebox2">
+                                            <label><input type="checkbox" name="screensize2" class="" checked>5,5"-6"</label>
+                                        </div>
+                                        <div class="checkbox" id="sizebox3">
+                                            <label><input type="checkbox" name="screensize3" class="">6" felett"</label>
+                                        </div>
+                                    </div>
+                                    <div class="text-center col-sm-6">
+                                        <img id="img-screensize-default" class="img-fluid screensize" src="{% static 'media/hands/phonegraphic.jpg' %}" style="width: 100%; height:160px; object-fit: contain; padding-top: 10px; padding-bottom:10px;"/>
+                                        <img class="img-fluid screensize" id="img-screensize-0" src="{% static 'media/hands/mini.jpeg' %}" style="width: 100%; height:160px; object-fit: contain; padding-top: 10px; padding-bottom:10px; display:none;"/>
+                                        <img class="img-fluid screensize" id="img-screensize-1" src="{% static 'media/hands/small.jpeg' %}" style="width: 100%; height:160px; object-fit: contain; padding-top: 10px; padding-bottom:10px;display:none;" />
+                                        <img class="img-fluid screensize" id="img-screensize-2" src="{% static 'media/hands/medium.jpeg' %}" style="width: 100%; height:160px; object-fit: contain; padding-top: 10px; padding-bottom:10px;display:none;" />
+                                        <img class="img-fluid screensize" id="img-screensize-3" src="{% static 'media/hands/large.jpeg' %}" style="width: 100%; height:160px; object-fit: contain; padding-top: 10px; padding-bottom:10px; display:none;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
             </div>
         </div>
-        <input type="submit" value="OK"/>
-    </form>
-    <div class="container" id="product-list-container">
-        <!-- TODO -->
-        <div class="loader"></div>
+    </div>
+<!-- <input type="submit" value="OK"  /> -->
+    <div class="container">
+        <h1>Ajánlott termékek</h1>
+        <div class="loader loader-products" id="product-list-loader"></div>
+        <div id="product-list-container">
+            <em>A fent megadott adatok alapján a következő termékek a leginkább ajánlottak (sorrendben):</em>
+            <div id="product-list">
+                <!-- TODO -->
+            </div>
+        </div>
     </div>
 </div>
-    {# {% include 'product/product_list.html' %} #}
+<div class="loader" id="main-loader">
+</div>
+{# {% include 'product/product_list.html' %} #}
 {% endblock %}
 {# {% include 'bootstrap-js.html' %} #}
 {% block 'productlist-js' %}

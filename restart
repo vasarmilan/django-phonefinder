@@ -1,6 +1,18 @@
+echo
+echo "deleting the database..."
+echo
 rm db.sqlite3
+echo
+echo "deleting migrations..."
+echo
 find . -name migrations -type d -exec find "{}" ! -name "__init__.py" -type f \; | xargs rm -f
+echo
+echo "making and applying migrations..."
+echo
 ./manage.py makemigrations
 ./manage.py migrate
+echo
+echo "loading fixtures..."
+echo
 ./manage.py loaddata criteria
-. startup
+./manage.py loaddata attributes

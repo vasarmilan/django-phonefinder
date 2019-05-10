@@ -129,3 +129,7 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+
+WEBSITE_DESCRIPTION = """
+Találja meg a legmegfelelőbb okostelefont az Ön személyre szabott igényei alapján!
+"""

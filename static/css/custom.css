@@ -5,12 +5,95 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-  position:absolute;
+  position:relative;
   top: 30%;
   left: 45%;
 }
 
+.loader-products {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid red; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.comparison {
+    display: none;
+}
+.comparison-active {
+    background: white;
+    display: block;
+}
+.comparison-hidden {
+    background-color: WhiteSmoke;
+    display: none;
+}
+.comp_name {
+    font-weight: bold;
+}
+.comparison .comp-button {
+    display: none;
+}
+.comparison-active .visible {
+    display: block;
+}
+.criterion-description {
+    font-size: 0.9em; font-weight:normal;color:black;
+}
+
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+
+
+i + .hover-or-click {
+  display: none;
+}
+
+i:focus + .hover-or-click, i:hover + .hover-or-click {
+  display: block;
+}
+
+.hover-or-click {
+    background: white;
+}
+
+.bar-5 {
+    width: 6px;
+    min-width: 6px;
+    height: 10px;
+    background-color: green;
+    display: inline-block;
+    margin-right: 2px;
+    /* margin-left: 0em; */
+    /* padding-left: 0em; */
+    /* padding-right: 0em; */
+    overflow:hidden;
+}
+
+.rating-container {
+    display: inline-flex;
+    border: 2px solid black;
+    overflow:hidden;
+    width: 82px;
+    height: 14px;
+}
+
+.accordion-toggle:after {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f061";
+    font-weight: 900;
+    float: right;
+}
+
+input[type="checkbox"] {
+    vertical-align: middle;
+}
+
+.checkbox:hover {
+    background: silver;
 }

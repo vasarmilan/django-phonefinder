@@ -3,28 +3,97 @@
     "model": "product.Criterion",
     "fields": {
       "name": "Vizuális",
+      "display_name": "Kamera",
+      "description": " A készülékben található kamera funkcionalitása és minõsége mellett számít a képek visszanézegetésének módja, illetve a készülék videolejátszási képessége is.",
+      "active": true,
       "id": 10001
     }
   },
   {
     "model": "product.Criterion",
     "fields": {
-      "name": "Ergonómia",
+      "name": "Anyaghasználat",
+      "display_name": "",
+      "description": "",
+      "active": false,
       "id": 10002
     }
   },
   {
     "model": "product.Criterion",
     "fields": {
-      "name": "Ár/érték aránya",
+      "name": "Összeszerelés minősége",
+      "display_name": "",
+      "description": "",
+      "active": false,
       "id": 10003
     }
   },
   {
     "model": "product.Criterion",
     "fields": {
+      "name": "Külső, anyaghasználat",
+      "display_name": "Külső, anyaghasználat",
+      "description": "Felhasznált anyagok, valamint az összeszerelés, illesztések minősége.",
+      "active": true,
+      "id": 10004,
+      "compute": "avg 10002 10003"
+    }
+  },
+  {
+    "model": "product.Criterion",
+    "fields": {
       "name": "Sebesség",
-      "id": 10004
+      "display_name": "Rendszersebesség, teljesítmény",
+      "description": "A rendszer általános sebessége, az alkalmazások indításának gyorsasága, a szoftver reakcióideje.",
+      "active": true,
+      "id": 10005
+    }
+  },
+  {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Ár/érték aránya",
+      "active": false,
+      "id": 10006
+    }
+  },
+  {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Üzemidő",
+      "display_name": "Üzemidő",
+      "active": true,
+      "description": "A készülék képességeihez mérten meddig bírja töltés nélkül az akkumulátor.",
+      "id": 10008
+    }
+  },
+  {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Hangminőség, vételi stabilitás",
+      "active": false,
+      "description": "A beszélgetés közben és kihangosítva tapasztalható hangminõséget értékeljük, a hálózattal való zökkenõmentes kapcsolattartást várjuk el.",
+      "id": 10009
+    }
+  },
+  {
+      "model": "product.Criterion",
+      "fields": {
+          "name": "Adatkommunikációs képességek",
+          "active": false,
+          "description": "",
+          "id": 10010
+      }
+    },
+    {
+    "model": "product.Criterion",
+    "fields": {
+      "name": "Telefonálás, hálózat",
+      "active": false,
+      "description": "Mobilhálózat és wi-fi kapcsolat gyorsasága és stabilitása, valamint telefonálás hangminősége és stabilitása tartozik ide",
+      "compute": "avg 10009 10010",
+      "id": 10011
     }
   }
 ]
